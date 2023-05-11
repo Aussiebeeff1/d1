@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Example Cinematic</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.js" integrity="sha512-H05oT7BAjM9Ai1IaFX9zr61NtE2e1P0MkTz3AZXBnseaJSAOt2FGMFJ+vVGutaJxEGA1jxUiYsTBYQNE08/Erw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        class Intro extends Phaser.Scene {
+            constructor() {
+                super('intro');
+            }
+       
+            
+            create() {
+               
+                this.add.text(10,10,"Click to begin.");
+                this.input.on('pointerdown', () => this.scene.start('Intro2'));
+            }
+        }
+
+        class Intro2 extends Phaser.Scene{
+            constructor() {
+                super('Intro2')
+            }
+            preload() {
+                this.load.path = "./assets/";
+                this.load.audio('introaud', 'introaud.wav');
+                this.load.spritesheet('beeff', 'beeff.png', {
+                    frameWidth: 420,
+                    frameHeight: 320
+                });
+                
+            }
+
+            create() {
+                const backgroundMusic = this.sound.add('introaud', { loop: true });
+                backgroundMusic.play();
+
+                this.add.sprite(4, 3, 'beeff')
+                 this.imageObject = this.add.sprite(
+                    250,
+                    175,
+                    'beeff',
+                );
+                 this.imageObject.setScale(1.9); //resize
+                this.anims.create({
+                    key: 'beeff',
+                    frames: this.anims.generateFrameNumbers('beeff', {
+                        start: 0,
+                        end: 31
+                    }),
+                    frameRate: 10,
+                    repeat: 0
+                });
+                this.imageObject.anims.play('beeff', true);
+                
+                this.input.on('pointerdown', () => this.scene.start('scene2'));
+            }
+        
+        }
+
+        class Scene2 extends Phaser.Scene {
+            constructor() {
+                super('scene2');
+            }
+            create() {
+                this.textObjectt = this.add.text(
+                    220, //x
+                    10,//y
+                    "What is Beeff",
+                    {
+                        font: "30px Impact",
+                        color: "#ffffff",
+                        align: "left"
+                    } //style
+                );
+
+                this.tweens.add({
+                    targets: this.textObjectt,
+                    alpha:{start: 0, to: 1},
+                    duration:4000,
+                    delay:1000,
+                    
+                });
+                //this.cameras.main.fadeIn(1000, 500 , 0, 0 );
+                
+                //let box = this.add.text(500, 100);
+                
+                this.textObjecttt = this.add.text(
+                    10, //x
+                    100,//y
+                    "1. \t\t the flesh of a cow, bull, or ox, used as food. \n \t\t\t\t\t there was the smell of roast beef",
+                    {
+                        font: "30px Impact",
+                        color: "#ffffff",
+                        align: "left"
+                    } //style
+                );
+
+                this.tweens.add({
+                    targets: this.textObjecttt,
+                    alpha:{start: 0, to: 1},
+                    duration:9000,
+                    delay:3000,
+                    
+                });
+
+                this.textObject = this.add.text(
+                    10, //x
+                    250,//y
+                    "2. \t the flesh of a cow, bull, or ox, used as food. \n \t\t\tflesh or muscle, typically when well developed. \n \t\t\t\t\t He needs a little more beef on his bones.",
+                    {
+                        font: "30px Impact",
+                        color: "#ffffff",
+                        align: "left"
+                    } //style
+                );
+
+                this.tweens.add({
+                    targets: this.textObject,
+                    alpha:{start: 0, to: 1},
+                    delay:7000,
+                    duration:10000,
+                    
+                });
+
+                
+
+                    this.thing = this.add.circle(310, 200, 500, 0xff0000);
+                    this.add.tween({
+                    targets: this.thing,
+                    scale: {start: 0, to: 1},
+                    delay:15000,
+                    duration: 1000,
+                    
+                });
+
+                // this.time.delayedCall(2000, () => {
+                //     this.cameras.main.fadeOut(2000, 255,0,0);
+                // });
+
+                // this.time.delayedCall(5000, () => {
+                //     this.scene.start('intro');
+                // })
+
+                this.input.on('pointerdown', () => this.scene.start('scene3'));
+            }
+        }
+
+        class Scene3 extends Phaser.Scene {
+            constructor() {
+                super('scene3');
+            }
+            create() {
+                this.textObjectt = this.add.text(
+                    300, //x
+                    200,//y
+                    "or",
+                    {
+                        font: "60px Impact",
+                        color: "#ffffff",
+                        align: "left"
+                    } //style
+                );
+
+                this.tweens.add({
+                    targets: this.textObjectt,
+                    alpha:{start: 0, to: 1},
+                    duration:4000,
+                    delay:1000,
+                    
+                });
+                
+                this.tweens.add({
+                    targets: this.textObjectt,
+                    alpha:{start: 0, to: 1},
+                    delay:7000,
+                    duration:10000,
+                    
+                });
+
+                
+
+                    this.thing = this.add.rectangle(320, 250, 700, 700, 0xffff00);
+                    this.add.tween({
+                    targets: this.thing,
+                    scale: {start: 0, to: 1},
+                    delay:3500,
+                    duration: 1000,
+                    
+                });
+                this.input.on('pointerdown', () => this.scene.start('scene4'));
+            }
+        }
+        class Scene4 extends Phaser.Scene {
+            constructor() {
+                super('scene4');
+            }
+            create() {
+                this.textObjectt = this.add.text(
+                    10, //x
+                    100,//y
+                    "2. \t verb",
+                    {
+                        font: "30px Impact",
+                        color: "#ffffff",
+                        align: "center"
+                    } //style
+                );
+
+                this.tweens.add({
+                    targets: this.textObjectt,
+                    alpha:{start: 0, to: 1},
+                    duration:4000,
+                    delay:1000,
+                    
+                });
+                this.textObjectt = this.add.text(
+                    10, //x
+                    200,//y
+                    "complain. \n He was beefing about how the recession was \n killing the business.",
+                    {
+                        font: "30px Impact",
+                        color: "#ffffff",
+                        align: "left"
+                    } //style
+                );
+
+                this.tweens.add({
+                    targets: this.textObjectt,
+                    alpha:{start: 0, to: 1},
+                    duration:4000,
+                    delay:1000,
+                    
+                });
+                
+                
+                
+
+                this.input.on('pointerdown', () => this.scene.start('scene5'));
+            }
+        }
+
+        class Scene5 extends Phaser.Scene {
+            constructor() {
+                super('scene5');
+            }
+            preload(){
+                this.load.path = "./assets/";
+                this.load.audio('titlescreen', 'titlescreen.wav');
+                this.load.image('f', 'f.png');
+                
+            }
+            create(){
+
+
+                
+                const backgroundMusic = this.sound.add('titlescreen', { loop: false });
+                backgroundMusic.play();
+           
+
+                //create image object 
+                this.imageObject = this.add.image(
+                    320,//x
+                    200,//y
+                    'f',//imagename
+                    
+                )
+                
+                this.imageObject.setScale(0.5)
+
+                
+                this.input.on('pointerdown', () => this.scene.start('intro'));
+            
+            };
+
+            
+        }  
+            
+        
+        new Phaser.Game({
+            width: 640,
+            height: 480,
+            scene: [Intro, Intro2, Scene2, Scene3, Scene4, Scene5],
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
